@@ -20,9 +20,8 @@ function potencia(base) {
     return Math.pow(base, exp);
   };
 }
-
 const potenciaDe2 = potencia(2);
 console.log(potenciaDe2(8));
 
 const pot34 = potencia(3)(4);
-console.log(resultadoPot);
+console.log(pot34);
