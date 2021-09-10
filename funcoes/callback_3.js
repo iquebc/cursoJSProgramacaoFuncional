@@ -36,8 +36,26 @@ const carrinho = [
   },
 ];
 
-const obterNome = (item) => item.nome;
-const obterValorTotal = (item) => item.qtde * item.preco;
+// const obterNome = (item) => item.nome;
+// const obterValorTotal = (item) => item.qtde * item.preco;
 
-console.log(carrinho.map(obterNome));
-console.log(carrinho.map(obterValorTotal));
+// console.log(carrinho.map(obterNome));
+// console.log(carrinho.map(obterValorTotal));
+
+Array.prototype.meuMap = function (fn) {
+  const novoArray = [];
+  for (let i = 0; i < this.length; i++) {
+    const resultado = fn(this[i], i, this);
+    console.log(resultado);
+    novoArray.push(resultado);
+  }
+  return novoArray;
+};
+
+const obterNome = (item, i) => {
+  return { nome: item.nome, i };
+};
+const obterValorTotal = (item, i) => item.qtde * item.preco;
+
+console.log(carrinho.meuMap(obterNome));
+//console.log(carrinho.meuMap(obterValorTotal));
