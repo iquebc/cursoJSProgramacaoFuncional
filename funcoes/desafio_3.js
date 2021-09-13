@@ -12,7 +12,6 @@ function lerArquivo(caminho) {
 }
 
 console.log("Iniciando Leitura");
-lerArquivo(caminho).then((resultado) => {
-  console.log(resultado);
-  console.log("Leitura Finalizada");
-});
+lerArquivo(caminho)
+  .then(console.log)
+  .then(() => console.log("Leitura Finalizada"));
