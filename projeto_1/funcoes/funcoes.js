@@ -1,47 +1,40 @@
 const fs = require("fs");
 const path = require("path");
-const pathDiretorio = path.join(path.dirname(__dirname), "/legendas");
 
-function obterLegendas() {
+function obterLegendas(caminho) {
   return new Promise((resolve, reject) => {
-    fs.readdir(pathDiretorio, (err, files) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(files.filter((fn) => fn.endsWith(".srt")));
-      }
-    });
+    try {
+      let files = fs.readdirSync(caminho);
+      files = files.map((file) => path.join(caminho, file));
+      resolve(files);
+    } catch (e) {
+      reject(e);
+    }
   });
 }
 
-async function lerLegendas() {
-  let conteudoLegendas = [];
-  const legendas = await obterLegendas();
-  legendas.forEach((legenda) => {
-    conteudoLegendas.push(lerLegenda(legenda));
-  });
-  return Promise.all(conteudoLegendas);
+function filtrarArquivos(tipo, files) {
+  files = files.filter((file) => file.endsWith(tipo));
+  return files;
+}
+
+async function lerLegendas(files) {
+  return Promise.all(files.map((file) => lerLegenda(file)));
 }
 
 function lerLegenda(legenda) {
   return new Promise((resolve, reject) => {
-    fs.readFile(path.join(pathDiretorio, legenda), (err, legenda) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(legenda.toString());
-      }
-    });
+    try {
+      let file = fs.readFileSync(legenda, { encoding: "utf-8" });
+      resolve(file.toString());
+    } catch (error) {
+      reject(error);
+    }
   });
 }
 
-function removerQuebraLinha(linha) {
-  return linha.replace(/\r?\n|\r/, "");
-}
-
-lerLegendas();
-
 module.exports = {
+  obterLegendas,
+  filtrarArquivos,
   lerLegendas,
-  removerQuebraLinha
 };
