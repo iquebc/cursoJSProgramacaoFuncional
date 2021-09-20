@@ -33,8 +33,23 @@ function lerLegenda(legenda) {
   });
 }
 
+function removerLinhaVazia(array) {
+  return array.filter((linha) => linha.trim());
+}
+
+function removerLinhaTempo(array) {
+  return array.filter((linha) => !linha.includes("-->"));
+}
+
+function removerLinhaNumero(array) {
+  return array.filter((linha) => !parseInt(linha.trim()));
+}
+
 module.exports = {
   obterLegendas,
   filtrarArquivos,
   lerLegendas,
+  removerLinhaVazia,
+  removerLinhaTempo,
+  removerLinhaNumero
 };

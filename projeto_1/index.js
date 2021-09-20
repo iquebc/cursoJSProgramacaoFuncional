@@ -9,5 +9,10 @@ funcoes
   .obterLegendas(pathDiretorio)
   .then((files) => funcoes.filtrarArquivos(".srt", files))
   .then((files) => funcoes.lerLegendas(files))
+  .then((files) => files.join(""))
+  .then((conteudo) => conteudo.split("\n"))
+  .then((linhas) => funcoes.removerLinhaVazia(linhas))
+  .then((linhas) => funcoes.removerLinhaTempo(linhas))
+  .then((linhas) => funcoes.removerLinhaNumero(linhas))
   .then(console.log)
   .catch(console.log);
