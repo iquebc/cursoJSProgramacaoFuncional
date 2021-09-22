@@ -45,11 +45,39 @@ function removerLinhaNumero(array) {
   return array.filter((linha) => !parseInt(linha.trim()));
 }
 
+function removerSimbolos(simbolos, array) {
+  return array.map((texto) => {
+    let textoSemSimbolos = texto;
+    simbolos.forEach((simbolo) => {
+      textoSemSimbolos = textoSemSimbolos.split(simbolo).join("");
+    });
+    return textoSemSimbolos;
+  });
+}
+
+function separarTextoPor(simbolo, texto) {
+  return texto.split(simbolo);
+}
+
+function mesclarElementos(array) {
+  return array.join(" ");
+}
+
+function ordenarPorAtributoNumerico(attr, array, ordem = "asc") {
+  const asc = (o1, o2) => o1[attr] - o2[attr];
+  const desc = (o1, o2) => o2[attr] - o1[attr];
+  return array.sort(ordem === "asc" ? asc : desc);
+}
+
 module.exports = {
   obterLegendas,
   filtrarArquivos,
   lerLegendas,
   removerLinhaVazia,
   removerLinhaTempo,
-  removerLinhaNumero
+  removerLinhaNumero,
+  removerSimbolos,
+  mesclarElementos,
+  separarTextoPor,
+  ordenarPorAtributoNumerico
 };
