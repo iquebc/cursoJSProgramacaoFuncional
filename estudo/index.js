@@ -6,7 +6,7 @@ const arquivo = path.join(diretorio, "tb_procedimento.txt");
 function lerArquivo() {
   return new Promise((resolve, reject) => {
     try {
-      const conteudoArquivo = fs.readFileSync(arquivo, { encoding: "ascii" });
+      const conteudoArquivo = fs.readFileSync(arquivo, { encoding: "latin1" });
       resolve(conteudoArquivo.toString());
     } catch (error) {
       reject(error);
