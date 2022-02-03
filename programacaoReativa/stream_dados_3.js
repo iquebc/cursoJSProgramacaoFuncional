@@ -1,4 +1,4 @@
-const { interval } = require("rxjs");
+const { interval, from } = require("rxjs");
 
 const gerarNumeros = interval(500);
 const sub1 = gerarNumeros.subscribe((num) => {
@@ -13,3 +13,6 @@ setTimeout(() => {
 setTimeout(() => {
   sub2.unsubscribe();
 }, 8000);
+
+
+from([1,2,3]).subscribe(console.log)

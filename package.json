@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/iquebc/cursoJSProgramacaoFuncional#readme",
   "dependencies": {
-    "rxjs": "^7.5.2"
+    "rxjs": "^6.0.0",
+    "xmlhttprequest": "^1.8.0"
   }
 }
